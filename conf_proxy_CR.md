@@ -40,26 +40,20 @@ Voici comment vous pourriez structurer ce script :
 ```bash
 #!/bin/bash
 
-# Chemin du fichier de configuration du proxy
-FILE="$HOME/proxy_college"
+# Remove proxy configuration from /etc/apt/apt.conf
+sudo sed -i '/Acquire::http::proxy/d' /etc/apt/apt.conf
+sudo sed -i '/Acquire::https::proxy/d' /etc/apt/apt.conf
 
-# Suppression du fichier de configuration du proxy
-if [ -f "$FILE" ]; then
-    rm "$FILE"
-    echo "Fichier de configuration du proxy supprimé."
-else
-    echo "Aucun fichier de configuration du proxy à supprimer."
-fi
+# Remove proxy configuration from ~/.bashrc
+sed -i '/http_proxy/d' ~/.bashrc
+sed -i '/https_proxy/d' ~/.bashrc
+sed -i '/ftp_proxy/d' ~/.bashrc
 
-# Retrait des variables d'environnement liées au proxy dans .bashrc
-sed -i '/http_proxy="http:\/\/10.1.0.5:8080"/d' ~/.bashrc
-sed -i '/https_proxy="http:\/\/10.1.0.5:8080"/d' ~/.bashrc
-sed -i '/ftp_proxy="http:\/\/10.1.0.5:8080"/d' ~/.bashrc
-
-# Rechargement des configurations du .bashrc
+# Optionally, you can reload ~/.bashrc to apply the changes immediately
 source ~/.bashrc
 
-echo "Les configurations de proxy et les variables d'environnement ont été retirées."
+echo "Proxy settings have been removed successfully."
+
 ```
 
 **Détails du script :**
