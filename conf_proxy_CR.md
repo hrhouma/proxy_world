@@ -7,12 +7,12 @@
 FILE="/home/ubuntu/proxy_college"
 
 # Création/écrasement du fichier avec les lignes de configuration du proxy
-echo "Acquire::http::Proxy \"http://10.1.0.5:8080\";" > $FILE
-echo "Acquire::https::Proxy \"https://10.1.0.5:8080\";" >> $FILE
+echo "Acquire::http::Proxy \"http://10.1.0.5:8080/\";" > $FILE
+echo "Acquire::https::Proxy \"https://10.1.0.5:8080/\";" >> $FILE
 
 # Ajout des variables d'environnement au fichier .bashrc pour persistance
 echo "export http_proxy=\"http://10.1.0.5:8080\"" >> ~/.bashrc
-echo "export https_proxy=\"https://10.1.0.5:8080\"" >> ~/.bashrc
+echo "export https_proxy=\"http://10.1.0.5:8080\"" >> ~/.bashrc
 echo "export ftp_proxy=\"http://10.1.0.5:8080\"" >> ~/.bashrc
 
 # Application des changements
