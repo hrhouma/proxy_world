@@ -3,30 +3,19 @@
 ```bash
 #!/bin/bash
 
-# Chemin du fichier de configuration du proxy
-FILE="$HOME/proxy_college"
+# Add proxy configuration to /etc/apt/apt.conf
+sudo bash -c 'echo "Acquire::http::proxy \"http://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
+sudo bash -c 'echo "Acquire::https::proxy \"https://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
 
-# Vérification de l'existence du fichier, le créer s'il n'existe pas
-if [ ! -f "$FILE" ]; then
-    touch "$FILE"
-fi
+# Add proxy configuration to ~/.bashrc
+echo 'export http_proxy=http://10.1.0.5:8080' >> ~/.bashrc
+echo 'export https_proxy=http://10.1.0.5:8080' >> ~/.bashrc
+echo 'export ftp_proxy=http://10.1.0.5:8080' >> ~/.bashrc
 
-# Attribution des permissions appropriées (777 est généralement trop permissif)
-chmod 777 "$FILE"
-
-# Création/écrasement du fichier avec les lignes de configuration du proxy
-echo "Acquire::http::Proxy \"http://10.1.0.5:8080/\";" > $FILE
-echo "Acquire::https::Proxy \"https://10.1.0.5:8080/\";" >> $FILE
-
-# Ajout des variables d'environnement au fichier .bashrc pour persistance
-echo "export http_proxy=\"http://10.1.0.5:8080\"" >> ~/.bashrc
-echo "export https_proxy=\"http://10.1.0.5:8080\"" >> ~/.bashrc
-echo "export ftp_proxy=\"http://10.1.0.5:8080\"" >> ~/.bashrc
-
-# Application des changements
+# Source the ~/.bashrc file to apply changes immediately
 source ~/.bashrc
 
-echo "Configuration du proxy et variables d'environnement ajoutées."
+echo "Proxy settings have been applied successfully."
 ```
 
 **Explications des modifications :**
