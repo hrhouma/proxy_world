@@ -4,7 +4,15 @@
 #!/bin/bash
 
 # Chemin du fichier de configuration du proxy
-FILE="/home/ubuntu/proxy_college"
+FILE="$HOME/proxy_college"
+
+# Vérification de l'existence du fichier, le créer s'il n'existe pas
+if [ ! -f "$FILE" ]; then
+    touch "$FILE"
+fi
+
+# Attribution des permissions appropriées (777 est généralement trop permissif)
+chmod 777 "$FILE"
 
 # Création/écrasement du fichier avec les lignes de configuration du proxy
 echo "Acquire::http::Proxy \"http://10.1.0.5:8080/\";" > $FILE
