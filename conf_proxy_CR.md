@@ -62,3 +62,25 @@ echo "Proxy settings have been removed successfully."
 - **Rechargement de `.bashrc` :** Après la modification, le script recharge les configurations du fichier `.bashrc` pour que les changements prennent effet immédiatement dans la session courante de l'utilisateur.
 
 Avec ce script, vous annulez toutes les modifications précédemment effectuées par l'autre script, en supprimant le fichier et les configurations environnementales ajoutées. Assurez-vous de l'exécuter avec les droits appropriés si nécessaire.
+
+# Annexe : sed 
+
+`sed` est un outil très puissant et polyvalent en ligne de commande qui est utilisé pour effectuer des transformations textuelles sur un flux de données (fichier ou entrée directe). Il est particulièrement utile pour les scripts d'automatisation car il peut modifier des fichiers en place sans avoir besoin de créer un fichier temporaire. Voici pourquoi `sed` est souvent le choix privilégié pour des tâches comme celle que nous abordons :
+
+1. **Automatisation :** `sed` peut être utilisé dans des scripts pour modifier automatiquement des fichiers sans interaction manuelle, ce qui est idéal pour des opérations comme modifier des fichiers de configuration ou des scripts de démarrage.
+
+2. **Puissance et flexibilité :** `sed` permet une grande variété d'opérations textuelles, comme l'insertion, la suppression, la recherche et le remplacement, ce qui le rend extrêmement flexible pour traiter des textes complexes.
+
+Quant à l'option `-i` spécifiquement :
+
+- **In-place editing (`-i`) :** Cela permet à `sed` de modifier le fichier directement sur place. Sans cette option, `sed` imprime le résultat sur la sortie standard (par défaut, l'écran), et le fichier original reste inchangé. Avec l'option `-i`, vous pouvez directement modifier le fichier sans avoir à le rediriger dans un nouveau fichier puis remplacer l'ancien.
+
+Un exemple de commande utilisant `sed` pourrait ressembler à cela :
+
+```bash
+sed -i '/pattern_to_delete/d' file.txt
+```
+
+Cette commande supprimera toutes les lignes qui contiennent `pattern_to_delete` du fichier `file.txt`, modifiant le fichier original directement grâce à l'option `-i`.
+
+Dans le contexte de notre script, utiliser `sed` pour retirer les lignes ajoutées au `.bashrc` concernant les variables de proxy est une manière efficace et propre de s'assurer que ces modifications sont correctement et complètement annulées.
